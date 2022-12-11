@@ -21,7 +21,7 @@ and bug fix. Suggestions and contributions welcome.
 
 MIT License
 
-V langupage version:   0.3.2 
+V language version:   0.3.2
 Basex version:        10.3
 
 Basex Setup:
