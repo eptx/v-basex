@@ -34,3 +34,25 @@ See https://vlang.io
 
 I like running tests during development using 'entr' so tests are rerun after making a source code change.
 >find . -name '*.v' | entr -cr v -stats -cg test basex/basex_test.v
+
+Example Usage: 
+In BaseX, create a user test/test with admin permissions
+
+```
+import eptx.basex
+
+fn main() {
+	mut session := basex.create('127.0.0.1', 1984, 'test', 'test') or {panic('No Session')}
+	session.execute('create database testdb <hello_test/>')!
+	mut response, mut info := session.execute('list')!
+	println(response)
+	assert response.contains('testdb')
+	assert response.contains('testdb.xml')
+
+	session.execute('drop database testdb')!
+	response, info = session.execute('list')!
+	println(response)
+	assert !response.contains('testdb')
+}
+
+```
